@@ -6,6 +6,9 @@ const minimist = require('minimist')
 const pump = require('pump')
 const path = require('path')
 
+function pinoFluentd(opts) {
+
+}
 
 function start (opts) {
   if (opts.help) {
@@ -17,6 +20,8 @@ function start (opts) {
     console.log('pino-fluentd', require('./package.json').version)
     return
   }
+
+  pump(process.stdin, pinoFluentd(opts))
 }
 
 if (require.main === module) {
@@ -29,7 +34,8 @@ if (require.main === module) {
       tag: 't',
       timeout: 'T',
       'reconnect-interval': 'ri',
-      'flush-interval': 'fi'
+      'flush-interval': 'fi',
+      'trace-level': 'l'
     },
     default: {
       host: 'localhost',

@@ -1,0 +1,28 @@
+{
+  "name": "pino-fluentd",
+  "version": "0.1.0",
+  "description": "Send pino logs to Fluentd",
+  "main": "pino-fluentd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidedantonio/pino-fluentd.git"
+  },
+  "keywords": [
+    "pino",
+    "fluentd",
+    "logger"
+  ],
+  "author": "Davide D'Antonio <davide.dantonio@webeetle.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidedantonio/pino-fluentd/issues"
+  },
+  "homepage": "https://github.com/davidedantonio/pino-fluentd#readme",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "pump": "^3.0.0"
+  }
+}

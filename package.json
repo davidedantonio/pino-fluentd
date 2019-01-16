@@ -4,7 +4,7 @@
   "description": "Send pino logs to Fluentd",
   "main": "pino-fluentd.js",
   "scripts": {
-    "test": "stadard"
+    "test": ""
   },
   "repository": {
     "type": "git",

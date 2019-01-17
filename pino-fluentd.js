@@ -13,6 +13,14 @@ const Writable = require('readable-stream').Writable
 function pinoFluentd(opts) {
   const splitter = split(function(line) {
     const parsed = new Parse(line)
+
+    const setDateTime = (value) => {
+      if (typeof value === 'object' && value.hasOwnProperty('time')) {
+        return (value.time.length) ? new Date(value.time).toISOString() : new Date().toISOString()
+      }
+      return new Date().toISOString()
+    }
+
     if (parsed.err) {
       this.emit('unknown', line, parsed)
       return
@@ -29,17 +37,13 @@ function pinoFluentd(opts) {
         value: setDateTime(value)
       })
     }
-
-    const setDateTime = (value) => {
-      if (typeof value === 'object' && value.hasOwnProperty('time')) {
-        return (value.time.length) ? new Date(value.time).toISOString() : new Date().toISOString()
-      }
-      return new Date().toISOString()
-    }
     return value
   })
 
-  const client = fluentd.createFluentSender(opts.tag ? opts.tag : 'pino', {
+  const type = opts.type || 'log'
+  const tag = opts.tag || 'pino'
+
+  const client = fluentd.createFluentSender(tag, {
     host: opts.host ? opts.host : undefined,
     port: opts.port ? opts.port : undefined,
     timeout: opts.timeout ? opts.timeout : undefined,
@@ -47,18 +51,21 @@ function pinoFluentd(opts) {
     flushInterval: opts['flush-interval'] ? opts['flush-interval'] : undefined
   })
 
+  client.on('error', err => splitter.emit('error', err))
+  client.on('connect', _ => console.log('connected'))
+
   const writable = new Writable({
     objectMode: true,
-    writev: (chuncks, cb) => {},
-    write: (body, enc, cb) => {}
+    write: (body, enc, cb) => {
+      client.emit(type, body)
+      cb()
+    }
   })
 
   pump(splitter, writable)
 
   return splitter
 }
-
-const type = opts.type || 'log'
 
 const start = opts => {
   if (opts.help) {

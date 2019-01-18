@@ -2,6 +2,7 @@
 
 var pino = require('pino')()
 
+pino.level = 10
 pino.info('hello world')
 pino.error('this is at error level')
 pino.info('the answer is %d', 42)
@@ -29,3 +30,5 @@ pino.child({ another: 'property' }).debug('this is a debug statement via child')
 pino.trace('this is a trace statement')
 
 pino.debug('this is a "debug" statement with "')
+
+pino.fatal('this is a fatal error')

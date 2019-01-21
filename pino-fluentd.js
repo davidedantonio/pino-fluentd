@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 'use strict'
 
-const fluentd = require('fluent-logger')
 const fs = require('fs')
 const minimist = require('minimist')
 const Parse = require('fast-json-parse')
@@ -9,6 +8,7 @@ const path = require('path')
 const pump = require('pump')
 const split = require('split2')
 const Writable = require('readable-stream').Writable
+const fluentd = require('fluent-logger')
 
 // pino log levels
 const levels = {
@@ -20,8 +20,8 @@ const levels = {
   fatal: 60
 }
 
-function pinoFluentd(opts) {
-  const splitter = split(function(line) {
+function pinoFluentd (opts) {
+  const splitter = split(function (line) {
     const parsed = new Parse(line)
 
     const setDateTime = (value) => {
@@ -31,8 +31,8 @@ function pinoFluentd(opts) {
       return new Date().toISOString()
     }
 
-    if (parsed.fixerr) {
-      this.emit('unknown', line, parsed)
+    if (parsed.err) {
+      this.emit('unknown', line, parsed.err)
       return
     }
 
@@ -61,17 +61,19 @@ function pinoFluentd(opts) {
     flushInterval: opts['flush-interval'] ? opts['flush-interval'] : undefined
   })
 
-  client.on('error', err => splitter.emit('error', err))
-  client.on('connect', () => splitter.emit('connected'))
-
   const writable = new Writable({
     objectMode: true,
     write: (body, enc, cb) => {
       if (body.level >= levels[traceLevel]) {
-        client.emit(key, body)
+        client.emit(key, body, function(err, data) {
+          if (!err) {
+            splitter.emit('insert', data, body)
+          } else {
+            splitter.emit('insertError', err)
+          }
+          cb()
+        })
       }
-
-      cb()
     }
   })
 

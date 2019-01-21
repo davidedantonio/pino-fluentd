@@ -3,16 +3,16 @@
 
   [0mTo send [33mpino[39m logs to fluentd:[0m
 
-     [33mcat log | pino-fluentd --host 192.168.1.2[39m
+     [33mcat log | pino-fluentd --tag debug --trace-level info
 
   [36m[1mFlags[22m[39m
-  [0m-h  | --help                  Display Help
-  -v  | --version               Display Version
-  -H  | --host                  the IP address of elasticsearch; default: 127.0.0.1
-  -p  | --port                  the port of fluentd; default: 24224
-  -tag| --tag                   the name of the tag to use; default: pino
-  -k  | --key                   the name of the type to use; default: log
-  -T  | --timeout               set the socket to timetout after timeout milliseconds of inactivity
-  -ri | --reconnect-interval    The reconnect interval in milliseconds
-  -fi | --flush-interval        The flush interval in milliseconds
-  -l  | --trace-level           trace level for the fluentd client, default 'error' (info, debug, trace)
+  [0m-h   | --help                  Display Help
+  -v   | --version               Display Version
+  -H   | --host                  the IP address of elasticsearch; default: 127.0.0.1
+  -p   | --port                  the port of fluentd; default: 24224
+  -t   | --tag                   the name of the tag to use; default: pino
+  -k   | --key                   the name of the type to use; default: log
+  -T   | --timeout               set the socket to timetout after timeout milliseconds of inactivity
+  -ri  | --reconnect-interval    The reconnect interval in milliseconds
+  -fi  | --flush-interval        The flush interval in milliseconds
+  -l   | --trace-level           trace level for the fluentd client, default 'error' (trace, debug, info, warn, error, fatal)

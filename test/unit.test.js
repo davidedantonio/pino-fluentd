@@ -13,6 +13,7 @@ const options = {
 }
 
 test('make sure date format is valid', (t) => {
+  t.plan(2)
   t.type(fix.datetime.object, 'string')
   t.equal(fix.datetime.object, fix.datetime.string)
   t.end()
@@ -20,6 +21,7 @@ test('make sure date format is valid', (t) => {
 
 test('make sure log is a valid json', (t) => {
   const FluentSender = function (tagPrefix, config) {
+    t.plan(6)
     t.equal(tagPrefix, `${options.tag}`)
     t.equal(config.host, `${options.host}`)
 

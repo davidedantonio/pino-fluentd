@@ -1,0 +1,12 @@
+---
+version: '3.6'
+services:
+  fluentd:
+    build: ./fluentd-mongodb
+    links:
+      - "mongodb"
+    ports: ["24224:24224"]
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports: ['27017:27017']

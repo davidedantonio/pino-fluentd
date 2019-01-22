@@ -1,0 +1,17 @@
+---
+version: '3.6'
+services:
+  fluentd:
+    build: ./fluentd-elasticsearch
+    links:
+      - "elasticsearch"
+    ports: ["24224:24224"]
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.1
+    container_name: elasticsearch
+    ports: ['9200:9200']
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.4.1
+    container_name: kibana
+    ports: ['5601:5601']
+    depends_on: ['elasticsearch']

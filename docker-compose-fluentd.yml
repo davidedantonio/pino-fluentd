@@ -1,0 +1,8 @@
+---
+version: '3.6'
+services:
+  fluentd:
+    build: ./fluentd
+    links:
+      - "elasticsearch"
+    ports: ["24224:24224"]

@@ -4,8 +4,9 @@
   "description": "Send pino logs to Fluentd",
   "main": "pino-fluentd.js",
   "scripts": {
-    "test": "tap test/*.test.js"
+    "test": "standard && tap test/*.test.js"
   },
+  "pre-commit": "test",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidedantonio/pino-fluentd.git"

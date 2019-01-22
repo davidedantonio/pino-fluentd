@@ -65,7 +65,7 @@ function pinoFluentd (opts) {
     objectMode: true,
     write: (body, enc, cb) => {
       if (body.level >= levels[traceLevel]) {
-        client.emit(key, body, function(err, data) {
+        client.emit(key, body, function (err, data) {
           if (!err) {
             splitter.emit('insert', data, body)
           } else {

@@ -25,7 +25,7 @@ test('make sure log is a valid json', (t) => {
     t.equal(tagPrefix, `${options.tag}`)
     t.equal(config.host, `${options.host}`)
 
-    return new Object({
+    return {
       emit: function (key, data, cb) {
         t.type(key, 'string')
         t.ok(data, true)
@@ -34,11 +34,11 @@ test('make sure log is a valid json', (t) => {
         cb(null, {})
         t.end()
       }
-    })
+    }
   }
 
   const fluent = proxyquire('../', {
-    'fluent-logger':  {
+    'fluent-logger': {
       createFluentSender: FluentSender
     }
   })

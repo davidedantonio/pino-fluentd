@@ -40,7 +40,7 @@ npm install pino-fluentd -g
   -l   | --trace-level           trace level for the fluentd client, default 'error' (trace, debug, info, warn, error, fatal)
 ```
 
-You can then use [Elasticsearch](https://www.elastic.co/products/elasticsearch) and [Kibana](https://www.elastic.co/products/kibana) to browse and visualize your logs, or simply use a [MongoDB](https://www.mongodb.com), or whatever you want. A full list of Data Output is [here](https://www.fluentd.org/dataoutputs).
+You can then use [Elasticsearch](https://www.elastic.co/products/elasticsearch) and [Kibana](https://www.elastic.co/products/kibana) to browse and visualize your logs, or whatever you want. A full list of Data Output is [here](https://www.fluentd.org/dataoutputs).
 
 ## Setup and testing
 

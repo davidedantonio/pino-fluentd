@@ -30,7 +30,7 @@ npm install pino-fluentd -g
   Flags
   -h   | --help                  Display Help
   -v   | --version               Display Version
-  -H   | --host                  the IP address of elasticsearch; default: 127.0.0.1
+  -H   | --host                  the IP address of fluentd; default: 127.0.0.1
   -p   | --port                  the port of fluentd; default: 24224
   -t   | --tag                   the name of the tag to use; default: pino
   -k   | --key                   the name of the type to use; default: log

@@ -4,6 +4,7 @@ const pino = require('pino')
 const proxyquire = require('proxyquire')
 const test = require('tap').test
 const fix = require('./fixtures')
+const fluentd = require('fluent-logger')
 
 const matchISOString = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/
 const options = {
@@ -25,8 +26,16 @@ test('make sure log is a valid json', (t) => {
     t.equal(tagPrefix, `${options.tag}`)
     t.equal(config.host, `${options.host}`)
 
-    return {
-      emit: function (key, data, cb) {
+    let client = fluentd.createFluentSender(tagPrefix, {
+      host: config.host ? config.host : undefined,
+      port: config.port ? config.port : undefined,
+      timeout: config.timeout ? config.timeout : undefined,
+      reconnectInterval: config['reconnect-interval'] ? config['reconnect-interval'] : undefined,
+      flushInterval: config['flush-interval'] ? config['flush-interval'] : undefined
+    })
+
+    client = Object.assign(client, {
+      emit: (key, data, cb) => {
         t.type(key, 'string')
         t.ok(data, true)
         t.type(data.time, 'string')
@@ -34,7 +43,9 @@ test('make sure log is a valid json', (t) => {
         cb(null, {})
         t.end()
       }
-    }
+    })
+
+    return client
   }
 
   const fluent = proxyquire('../', {

@@ -61,6 +61,9 @@ function pinoFluentd (opts) {
     flushInterval: opts['flush-interval'] ? opts['flush-interval'] : undefined
   })
 
+  client.on('error', err => splitter.emit('error', err))
+  client.on('connect', () => splitter.emit('connected'))
+
   const writable = new Writable({
     objectMode: true,
     write: (body, enc, cb) => {
@@ -71,9 +74,10 @@ function pinoFluentd (opts) {
           } else {
             splitter.emit('insertError', err)
           }
-          cb()
         })
       }
+
+      cb()
     }
   })
 

@@ -46,9 +46,9 @@ You can then use [Elasticsearch](https://www.elastic.co/products/elasticsearch) 
 
 Setting up `pino-fluentd` is easy and you can use the bundled `docker-compose-*.yml` file to bring up a Fluentd with or without Elasictsearch and Kibana containers.
 
-You will need [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/), then in this project folder, launch `docker-compose up -f docker-compose-*.yml`.
+You will need [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/), then in this project folder, launch `docker-compose -f docker-compose-*.yml up`.
 
-You can test it by launching node example | pino-fluentd, in this project folder. You will need to have pino-fluentd installed globally.
+You can test it by launching `node example | pino-fluentd`, in this project folder. You will need to have pino-fluentd installed globally.
 
 ## License
 

@@ -50,6 +50,40 @@ You will need [docker](https://www.docker.com/) and [docker-compose](https://doc
 
 You can test it by launching `node example | pino-fluentd`, in this project folder. You will need to have pino-fluentd installed globally.
 
+## Forward to Elasticsearch
+
+Fluentd can be configured to forward your logs to ElasticSearch (and search them with Kibana maybe?).
+In order to use fluentd with ElasticSearch you need to install the fluent-plugin-elasticsearch plugin on your fluentd instance:
+
+```
+gem install fluent-plugin-elasticsearch
+```
+
+In your Fluentd configuration file, use `@type elasticsearch`. Additional configuration is optional, default values would look like this:
+
+```
+# File fluent.conf
+<source>
+  @type forward
+  port 24224
+  bind 0.0.0.0
+</source>
+<match pino.*>
+  @type copy
+  <store>
+    @type elasticsearch
+    host elasticsearch
+    port 9200
+    flush_interval 10s
+  </store>
+  <store>
+    @type stdout
+  </store>
+</match>
+```
+
+When Fluentd receives some logs from `pino-fluentd` and has flushed them to Elasticsearch after a certain interval (in this example 10 seconds), you can view, search and visualize, the log data using Kibana.
+
 ## License
 
 Licensed under [MIT](./LICENSE)

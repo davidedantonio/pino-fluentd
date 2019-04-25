@@ -1,6 +1,6 @@
 # pino-fluentd
 
-[![Build Status](https://travis-ci.com/davidedantonio/pino-fluentd.svg?branch=master)](https://travis-ci.com/davidedantonio/pino-fluentd) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) ![npm-version](https://img.shields.io/npm/v/pino-fluentd.svg)
+[![Build Status](https://travis-ci.com/davidedantonio/pino-fluentd.svg?branch=master)](https://travis-ci.com/davidedantonio/pino-fluentd) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/davidedantonio/pino-fluentd.svg)](https://greenkeeper.io/) ![npm-version](https://img.shields.io/npm/v/pino-fluentd.svg)
 
 Send [pino](https://github.com/pinojs/pino) logs to [Fluentd](https://www.fluentd.org/). This plugin is fully inspired to [pino-elasticsearch](https://github.com/pinojs/pino-elasticsearch)
 

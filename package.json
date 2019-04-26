@@ -1,6 +1,6 @@
 {
   "name": "pino-fluentd",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Send pino logs to Fluentd",
   "main": "pino-fluentd.js",
   "bin": {

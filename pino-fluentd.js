@@ -25,7 +25,7 @@ function pinoFluentd (opts) {
     const parsed = new Parse(line)
 
     const setDateTime = (value) => {
-      if (typeof value === 'object' && value.hasOwnProperty('time')) {
+      if (typeof value === 'object' && Object.prototype.hasOwnProperty.call(value, 'time')) {
         return (value.time.length) ? new Date(value.time).toISOString() : new Date().toISOString()
       }
       return new Date().toISOString()

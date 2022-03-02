@@ -1,6 +1,6 @@
 'use strict'
 
-var pino = require('pino')()
+const pino = require('pino')()
 
 pino.level = 10
 pino.info('hello world')
@@ -14,10 +14,10 @@ setImmediate(function () {
 })
 pino.error(new Error('an error'))
 
-var child = pino.child({ a: 'property' })
+const child = pino.child({ a: 'property' })
 child.info('hello child!')
 
-var childsChild = child.child({ another: 'property' })
+const childsChild = child.child({ another: 'property' })
 childsChild.info('hello baby..')
 
 pino.debug('this should be mute')

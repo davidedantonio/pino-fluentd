@@ -32,7 +32,7 @@
     "fluent-logger": "^3.4.1",
     "minimist": "^1.2.5",
     "pump": "^3.0.0",
-    "readable-stream": "^3.6.0",
+    "readable-stream": "^3.6.1",
     "split2": "^4.1.0"
   },
   "devDependencies": {
